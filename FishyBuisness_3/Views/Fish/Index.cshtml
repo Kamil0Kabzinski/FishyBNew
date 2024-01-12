@@ -1,0 +1,106 @@
+﻿@model IEnumerable<FishyBuisness_3.Models.Fish>
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@using BootstrapIcons;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Fish List";
+}
+<style>
+    table {
+        border-collapse: collapse;
+        width: fit-content;
+    }
+
+    th, td {
+        border: 2px solid #000; /* Grubość 2px, kolor czarny (zmień według potrzeb) */
+        padding: 8px; /* Dodatkowy padding dla lepszego wyglądu */
+        text-align: left; /* Ustawienie tekstu do lewej strony */
+        background-color: #00bcd4;
+        border-bottom: 2px solid #000;
+        width: fit-content;
+       
+    }
+
+</style>
+
+<h1 class="mb-4">@localizer["FishList"]</h1>
+
+<div class="mb-4">
+    <a asp-action="Create" class="btn btn-success">Create New</a>
+</div>
+
+@using (Html.BeginForm())
+{
+    <div class="mb-4">
+        <label class="form-label">@localizer["SearchName"]:</label>
+        <div class="input-group">
+            @Html.TextBox("SearchString", ViewBag.FilterValue as string, new { @class = "form-control" })
+            <button type="submit" class="btn btn-primary">@localizer["Find"]</button>
+        </div>
+    </div>
+}
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    <a asp-action="Index" asp-route-Sorting_Order="@ViewBag.SortingName" class="text-dark text-decoration-none">
+
+                        @if (ViewBag.SortingName == "FishNameDesc")
+                        {
+                            <span>@localizer["FishName"]</span><i class="bi bi-arrow-down"></i>
+                        }
+                        else
+                        {
+                            <span>@localizer["FishName"]</span><i class="bi bi-arrow-up"></i>
+                        }
+                    </a>
+                </th>
+                <th>@localizer["Description"]</th>
+                <th>@localizer["Species"]</th>
+                <th>@localizer["Habitat"]</th>
+                <th>@localizer["Length"]</th>
+                <th>@localizer["Weight"]</th>
+                <th>
+                    <a asp-action="Index" asp-route-Sorting_Order="@ViewBag.SortingPrice" class="text-dark text-decoration-none">
+                        @if (ViewBag.SortingPrice == "PriceAsc")
+                        {
+
+
+                            <span>@localizer["Price"]</span> <i class="bi bi-arrow-up"></i>
+                        }
+                        else
+                        {
+                            <span>@localizer["Price"]</span><i class="bi bi-arrow-down"></i>
+                        }
+                    </a>
+                </th>
+                <th>@localizer["Environment"]</th>
+                <th>@localizer["Options"]</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.FishName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.FishDescription)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Spieces)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Habitat)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Lenght)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Weight)</td>
+                    <td>$@Html.DisplayFor(modelItem => item.Price)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Environment.Name)</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a asp-action="Edit" asp-route-id="@item.FishId" class="btn btn-warning btn-sm">@localizer["Edit"]</a>
+                            <a asp-action="Details" asp-route-id="@item.FishId" class="btn btn-info btn-sm">@localizer["Details"]</a>
+                            <a asp-action="Delete" asp-route-id="@item.FishId" class="btn btn-danger btn-sm">@localizer["Delete"]</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

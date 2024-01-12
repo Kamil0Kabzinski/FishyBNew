@@ -1,0 +1,57 @@
+﻿@model IEnumerable<FishyBuisness_3.Models.Stock>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fish)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FishTank)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Environment)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fish.FishName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FishTank.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Environment.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.StockId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.StockId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.StockId">Delete</a> |
+                    <a asp-action="Transfer" asp-route-id="@item.StockId">Transfer</a> |
+            </td>
+        </tr>
+
+           
+}
+    </tbody>
+</table>

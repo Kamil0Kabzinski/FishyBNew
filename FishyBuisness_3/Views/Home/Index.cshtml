@@ -1,0 +1,94 @@
+﻿ @model IEnumerable<IGrouping<int, FishyBuisness_3.Models.Stock>>
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = @localizer["FishyBusinessWarehouse"];
+}
+<h1>@ViewData["Title"]</h1>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+        background: linear-gradient(to bottom,#bfe9ff,black);
+            margin: 0;
+
+        }
+
+    h1 {
+        color: #fff;
+        text-align: center;
+        font-size: 2.5em;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+          table {
+        font-family: 'Montserrat', sans-serif;
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            margin-inline: 2px;
+        background-color: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            opacity: 0.95;
+            transform: scale(0.95);
+            animation: table-entrance 1s ease-out forwards;
+
+        }
+
+        td.price{
+        color: #1ee294;
+        }
+  
+        
+  
+
+</style>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@localizer["FishTank"]</th>
+            <th>@localizer["Fish"]</th>
+            <th>@localizer["FishDescription"]</th>
+            <th>@localizer["Spieces"]</th>
+            <th>@localizer["Environment"]</th>
+            <th>@localizer["Quantity"]</th>
+            <th>@localizer["Price"]</th>
+            <th>@localizer["StockValue"]</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var group in Model)
+        {
+            <tr>
+                <td>@group.First().FishTank.Name</td>
+                <td colspan="2"></td> <!-- Empty cells for Fish and Quantity column headers -->
+            </tr>
+            foreach (var stock in group)
+            {
+                <tr>
+                    <td></td> <!-- Empty cell for FishTankID column -->
+                    <td>@stock.Fish.FishName</td>
+                    <td>@stock.Fish.FishDescription</td>
+                    <td>@stock.Fish.Spieces</td>
+                    <td>@stock.Environment.Name</td>
+                    <td>@stock.Quantity</td>
+                    <td>@stock.Fish.Price</td>
+                    <td>$@(stock.Fish.Price * stock.Quantity)</td>
+                </tr>
+            }
+
+
+            <tr>
+                <td colspan="5"></td> 
+                <td><strong>@localizer["TotalValue"]:</strong></td>
+                <td></td>
+                <td class="price"><strong>$@(Math.Round(group.Sum(s => s.Fish.Price * s.Quantity), 2))</strong></td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,12 @@
+﻿INSERT INTO dbo.Fish (FishName, FishDescription, Spieces, Habitat, Lenght, Weight, Price)
+VALUES
+    ('Rainbow Trout', 'A colorful freshwater fish', 'Oncorhynchus mykiss', 'River', 18.0, 3.5, 22.50),
+    ('Blue Tang', 'A vibrant blue fish with a yellow tail', 'Paracanthurus hepatus', 'Coral Reef', 12.0, 0.5, 35.75),
+    ('Another Fish', 'Description for Another Fish', 'Another Species', 'Another Habitat', 15.5, 1.8, 12.99),
+    ('Yet Another Fish', 'Description for Yet Another Fish', 'Yet Another Species', 'Yet Another Habitat', 20.2, 2.0, 18.75),
+    ('Colorful Fish', 'Description for Colorful Fish', 'Colorful Species', 'Colorful Habitat', 10.8, 0.7, 25.50),
+    ('Striped Fish', 'Description for Striped Fish', 'Striped Species', 'Striped Habitat', 14.3, 1.2, 30.25),
+    ('Exotic Fish', 'Description for Exotic Fish', 'Exotic Species', 'Exotic Habitat', 22.5, 4.2, 40.00),
+    ('Small Fish', 'Description for Small Fish', 'Small Species', 'Small Habitat', 8.5, 0.3, 15.99),
+    ('Big Fish', 'Description for Big Fish', 'Big Species', 'Big Habitat', 30.0, 8.0, 55.50),
+    ('Mysterious Fish', 'Description for Mysterious Fish', 'Mysterious Species', 'Mysterious Habitat', 25.5, 6.5, 48.75);
