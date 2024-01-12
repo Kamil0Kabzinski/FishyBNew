@@ -4,10 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FishyBuisness_3.Controllers
 {
+    [Authorize]
     public class AppRolesController : Controller
 
     {
-
+       
         private readonly RoleManager<IdentityRole> _roleManager;
 
         public AppRolesController(RoleManager<IdentityRole> roleManager)
@@ -26,7 +27,7 @@ namespace FishyBuisness_3.Controllers
 
 
         [HttpGet]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -45,7 +46,7 @@ namespace FishyBuisness_3.Controllers
         }
 
         [HttpGet]
-    //    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(IdentityRole model)
         {
             if (string.IsNullOrEmpty(model.Id))

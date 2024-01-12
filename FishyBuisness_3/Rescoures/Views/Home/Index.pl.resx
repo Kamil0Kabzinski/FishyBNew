@@ -141,6 +141,9 @@
   <data name="Fish" xml:space="preserve">
     <value>Ryba</value>
   </data>
+  <data name="FishDescription" xml:space="preserve">
+    <value>Opis ryby</value>
+  </data>
   <data name="FishList" xml:space="preserve">
     <value>Rybopedia</value>
   </data>
@@ -181,7 +184,7 @@
     <value>Gatunek</value>
   </data>
   <data name="StockValue" xml:space="preserve">
-    <value>Cena jdn.</value>
+    <value>Łącznie</value>
   </data>
   <data name="TotalValue" xml:space="preserve">
     <value>Łącznie</value>

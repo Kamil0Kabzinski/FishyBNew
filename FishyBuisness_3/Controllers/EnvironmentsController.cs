@@ -8,10 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using FishyBuisness_3.Data;
 using FishyBuisness_3.Models;
 using Environment = FishyBuisness_3.Models.Environment;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace FishyBuisness_3.Controllers
 {
+    [Authorize]
     public class EnvironmentsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -27,7 +29,7 @@ namespace FishyBuisness_3.Controllers
             return View(await _context.Environments.ToListAsync());
         }
 
-        // GET: Environments/Details/5
+        // GET: Environments/Details
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -52,8 +54,6 @@ namespace FishyBuisness_3.Controllers
         }
 
         // POST: Environments/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("EnvironmentId,Name,Description")] Environment environment)
@@ -67,7 +67,7 @@ namespace FishyBuisness_3.Controllers
             return View(environment);
         }
 
-        // GET: Environments/Edit/5
+        // GET: Environments/Edit
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -84,8 +84,6 @@ namespace FishyBuisness_3.Controllers
         }
 
         // POST: Environments/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("EnvironmentId,Name,Description")] Models.Environment environment)
@@ -118,7 +116,7 @@ namespace FishyBuisness_3.Controllers
             return View(environment);
         }
 
-        // GET: Environments/Delete/5
+        // GET: Environments/Delete
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,7 +134,7 @@ namespace FishyBuisness_3.Controllers
             return View(environment);
         }
 
-        // POST: Environments/Delete/5
+        // POST: Environments/Delete
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

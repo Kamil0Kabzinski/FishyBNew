@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FishyBuisness_3.Data;
 using FishyBuisness_3.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FishyBuisness_3.Controllers
 {
+    [Authorize]
     public class FishTanksController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -53,8 +55,6 @@ namespace FishyBuisness_3.Controllers
         }
 
         // POST: FishTanks/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("FishTankId,Name,Descirption,Capacity,EnvironmentId")] FishTank fishTank)
@@ -69,7 +69,7 @@ namespace FishyBuisness_3.Controllers
             return View(fishTank);
         }
 
-        // GET: FishTanks/Edit/5
+        // GET: FishTanks/Edit
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,9 +86,7 @@ namespace FishyBuisness_3.Controllers
             return View(fishTank);
         }
 
-        // POST: FishTanks/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: FishTanks/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("FishTankId,Name,Descirption,Capacity,EnvironmentId")] FishTank fishTank)

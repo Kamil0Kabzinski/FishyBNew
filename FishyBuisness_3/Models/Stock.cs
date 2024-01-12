@@ -19,10 +19,8 @@ namespace FishyBuisness_3.Models
         [DisplayName("Environment ID")]
         public int EnvironmentId {  get; set; }
 
-        // Klucz obcy do modelu Product
         public Fish? Fish { get; set; }
 
-        // Klucz obcy do modelu Warehouse
         public FishTank? FishTank { get; set; }
 
         public Environment? Environment { get; set; }

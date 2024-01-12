@@ -1,5 +1,6 @@
 using FishyBuisness_3.Data;
 using FishyBuisness_3.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Localization;
@@ -8,6 +9,7 @@ using System.Diagnostics;
 
 namespace FishyBuisness_3.Controllers
 {
+	[AllowAnonymous]
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;

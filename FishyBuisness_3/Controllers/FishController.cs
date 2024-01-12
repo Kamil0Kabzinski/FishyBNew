@@ -9,12 +9,14 @@ using FishyBuisness_3.Data;
 using FishyBuisness_3.Models;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.AspNetCore.Mvc.Localization;
+using Microsoft.AspNetCore.Authorization;
 
 
 
 
 namespace FishyBuisness_3.Controllers
 {
+    [Authorize]
     public class FishController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -77,6 +79,7 @@ namespace FishyBuisness_3.Controllers
         }
 
         // GET: Fish/Create
+        [Authorize(Roles="Admin, Supplier")]
         [HttpGet]
         public IActionResult Create()
         {
@@ -84,6 +87,7 @@ namespace FishyBuisness_3.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin, Supplier")]
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -98,6 +102,7 @@ namespace FishyBuisness_3.Controllers
             ViewData["EnvironmentId"] = new SelectList(_context.Environments, "EnvironmentId", "Name", fish.EnvironmentId);
             return View(fish);
         }
+        [Authorize(Roles = "Admin, Supplier")]
 
         // GET: Fish/Edit
         public async Task<IActionResult> Edit(int? id)
@@ -115,6 +120,7 @@ namespace FishyBuisness_3.Controllers
             ViewData["EnvironmentId"] = new SelectList(_context.Environments, "EnvironmentId", "Name", fish.EnvironmentId);
             return View(fish);
         }
+        [Authorize(Roles = "Admin, Supplier")]
 
         // POST: Fish/Edit
         [HttpPost]
@@ -149,6 +155,7 @@ namespace FishyBuisness_3.Controllers
             ViewData["EnvironmentId"] = new SelectList(_context.Environments, "EnvironmentId", "Name", fish.EnvironmentId);
             return View(fish);
         }
+        [Authorize(Roles = "Admin, Supplier")]
 
         // GET: Fish/Delete
         public async Task<IActionResult> Delete(int? id)
@@ -168,6 +175,7 @@ namespace FishyBuisness_3.Controllers
 
             return View(fish);
         }
+        [Authorize(Roles = "Admin, Supplier")]
 
         // POST: Fish/Delete
         [HttpPost, ActionName("Delete")]

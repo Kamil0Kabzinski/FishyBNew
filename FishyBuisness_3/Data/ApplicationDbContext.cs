@@ -18,7 +18,7 @@ namespace FishyBuisness_3.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Konfiguracja relacji między WarehouseItem, Product i Warehouse
+       
             modelBuilder.Entity<Stock>()
                 .HasOne(wi => wi.Fish)
                 .WithMany()

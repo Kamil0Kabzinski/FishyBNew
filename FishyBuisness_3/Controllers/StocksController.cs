@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FishyBuisness_3.Data;
 using FishyBuisness_3.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FishyBuisness_3.Controllers
 {
-    public class StocksController : Controller
+    [Authorize]
+     public class StocksController : Controller
     {
         private readonly ApplicationDbContext _context;
 
@@ -26,7 +28,9 @@ namespace FishyBuisness_3.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Stocks/Details/5
+        // GET: Stocks/Details
+        [Authorize(Roles = "StoreKeeper,Admin")]
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -46,7 +50,7 @@ namespace FishyBuisness_3.Controllers
 
             return View(stock);
         }
-
+        [Authorize(Roles = "StoreKeeper,Admin")]
         // GET: Stocks/Create
         public IActionResult Create()
         {
@@ -57,8 +61,7 @@ namespace FishyBuisness_3.Controllers
         }
 
         // POST: Stocks/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin, StoreKeeper")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("StockId,FishId,FishTankId,Quantity,EnvironmentId")] Stock stock)
@@ -74,7 +77,7 @@ namespace FishyBuisness_3.Controllers
             ViewData["FishTankId"] = new SelectList(_context.FishTanks, "FishTankId", "Name", stock.FishTankId);
             return View(stock);
         }
-
+        [Authorize(Roles = "StoreKeeper")]
         // GET: Stocks/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -94,9 +97,7 @@ namespace FishyBuisness_3.Controllers
             return View(stock);
         }
 
-        // POST: Stocks/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Stocks/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("StockId,FishId,FishTankId,Quantity,EnvironmentId")] Stock stock)
