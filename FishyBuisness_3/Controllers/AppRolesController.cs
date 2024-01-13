@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FishyBuisness_3.Controllers
 {
-    [Authorize]
+    
     public class AppRolesController : Controller
 
     {
@@ -87,7 +87,7 @@ namespace FishyBuisness_3.Controllers
         }
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        // [Authorize(Roles = "Admin")]
+         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -96,7 +96,7 @@ namespace FishyBuisness_3.Controllers
             }
 
             IdentityRole role = await _roleManager.FindByIdAsync(id);
-            if (role == null)
+            if (role == null || role.Name == "Admin")//admina nie mozna usunąc
             {
                 return RedirectToAction("Index");
             }
